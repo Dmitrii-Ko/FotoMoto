@@ -74,7 +74,7 @@ try:
         data.append([f"{file_name}.{file_extension}", *weight])
 
         print(f"{index}/{len(files)} processed files ...")
-except KeyboardInterrupt:
+except BaseException:
     # Saving data is the main priority,
     # if the program keyboard interrupt, the script will save the data
 
