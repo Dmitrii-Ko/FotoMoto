@@ -19,14 +19,18 @@ from motorcycle_detection import detect_motorcycles
 
 
 def logging(filename, index, size, progressbar_length=30):
-    # Progress bar
+    """
+    Progress bar
+    """
 
     interval = index // (size // progressbar_length)
     print("\u001b[100D", end="")
     print(
         f"{filename} is processing: "
-        f"[{'#' * interval}{' ' * (progressbar_length - interval)}] "
-        f"{round(100 * index / size):2d}%",
+        f"[{'#' * interval}"
+        f"{'.' if index % 2 else '-'}"
+        f"{' ' * (progressbar_length - interval)}] "
+        f"{round(100 * index / size):3d}%",
         end="",
     )
     stdout.flush()
@@ -75,7 +79,7 @@ processed_files = [element["filename"] for element in processed_elements]
 row_elements = json.loads(open(ROW_JSON, "r").read())
 
 try:
-    for index, element in enumerate(row_elements[:40]):
+    for index, element in enumerate(row_elements):
 
         filename, captions = parsing_info(element)
 
